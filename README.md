@@ -9,6 +9,7 @@
 
 ## 아키텍처(초기)
 - `DesktopApp`: UI 셸 및 작업 제어
+<<<<<<< codex/develop-local-pdf-conversion-tool-9cj298
 - `Core`: 변환 요청/결과 모델, 라우터, 작업 큐, 실행 커맨드 러너
 - `Adapters`: 포맷별 변환 어댑터(HWP/Office/TextImage)
 
@@ -26,3 +27,19 @@
 - Text/Image 실제 PDF 생성 엔진 연결
 - HWP 중간 포맷 파이프라인 연결
 - 로그/실패 리포트 저장 구현
+=======
+- `Core`: 변환 요청/결과 모델, 라우터, 작업 큐
+- `Adapters`: 포맷별 변환 어댑터(HWP/Office/TextImage)
+
+## 현재 상태
+초기 스캐폴딩 완료:
+1. 공통 모델/인터페이스
+2. 확장자 기반 라우터
+3. 메모리 기반 작업 큐(JobManager)
+4. 어댑터 스텁 구현
+
+다음 단계:
+- .NET UI 프로젝트 생성 및 Core 연결
+- LibreOffice 연동(Office 어댑터)
+- HWP 중간 포맷 파이프라인 연결
+>>>>>>> main
