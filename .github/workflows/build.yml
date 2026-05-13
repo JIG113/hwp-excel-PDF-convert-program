@@ -1,0 +1,20 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  windows-build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore hwp-excel-PDF-convert-program.sln
+      - name: Build
+        run: dotnet build hwp-excel-PDF-convert-program.sln -c Release --no-restore
+      - name: Test
+        run: dotnet test hwp-excel-PDF-convert-program.sln -c Release --no-build

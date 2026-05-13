@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DocToPdf.Core</AssemblyName>
+    <RootNamespace>DocToPdf.Core</RootNamespace>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,32 @@
+<Window x:Class="DocToPdf.DesktopApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Doc to PDF Converter" Height="600" Width="1000">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+            <Button Content="파일 추가" Width="100" Margin="0,0,8,0" Command="{Binding AddFilesCommand}"/>
+            <Button Content="출력 폴더" Width="100" Margin="0,0,8,0" Command="{Binding SelectOutputFolderCommand}"/>
+            <Button Content="변환 시작" Width="100" Command="{Binding StartCommand}"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Jobs}" AutoGenerateColumns="False" CanUserAddRows="False" AllowDrop="True" Drop="OnDropFiles">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="파일명" Binding="{Binding FileName}" Width="2*"/>
+                <DataGridTextColumn Header="상태" Binding="{Binding Status}" Width="*"/>
+                <DataGridTextColumn Header="진행률" Binding="{Binding Progress}" Width="*"/>
+                <DataGridTextColumn Header="오류" Binding="{Binding ErrorMessage}" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <ProgressBar Grid.Row="2" Height="20" Minimum="0" Maximum="100" Value="{Binding TotalProgress}"/>
+    </Grid>
+</Window>
