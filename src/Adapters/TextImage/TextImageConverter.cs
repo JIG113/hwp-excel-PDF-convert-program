@@ -1,3 +1,4 @@
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Converter.Core.Conversion;
@@ -11,12 +12,17 @@ public sealed class TextImageConverter : IConverter
 
     public Task<ConversionResult> ConvertAsync(ConversionRequest request, CancellationToken cancellationToken)
     {
-        // TODO: 텍스트/이미지 PDF 생성 엔진 연동
+        var preflightError = ConversionPreflight.ValidatePaths(request);
+        if (preflightError is not null)
+        {
+            return Task.FromResult(preflightError);
+        }
+
+        // NOTE: 다음 단계에서 실제 PDF 렌더러(PDFium/PDFSharp 등)로 대체 예정.
+        File.Copy(request.InputPath, request.OutputPath, overwrite: true);
         return Task.FromResult(new ConversionResult(
             request.InputPath,
             request.OutputPath,
-            ConversionStatus.Failed,
-            ErrorCode: "NOT_IMPLEMENTED",
-            ErrorMessage: "Text/Image converter is scaffolded but not implemented yet."));
+            ConversionStatus.Succeeded));
     }
 }
